@@ -19,6 +19,7 @@ exec 'status "Setting PATH"'
 exec 'mkdir -p $build_dir/.profile.d'
 exec 'echo "export PATH=\"\$HOME/vendor/mdbtools/src/util:\$PATH\"" > $build_dir/.profile.d/mdbtools.sh'
 
+exec 'echo "-----> Installation complete of mdbtools 0.7"'
 
 LanguagePack::Instrument.trace 'compile', 'app.compile' do
   if pack = LanguagePack.detect(ARGV[0], ARGV[1])
