@@ -7,16 +7,17 @@ $:.unshift File.expand_path("../../lib", __FILE__)
 require "language_pack"
 
 
-exec `echo "-----> Installing mdbtools 0.7"`
-# exec `cd $1`
-# exec `curl https://s3.amazonaws.com/db-stat/public/mdbtools-0.7.tar.gz -s -O`
-# exec `mkdir -p vendor`
-# exec `tar -C vendor -xvf mdbtools-0.7.tar.gz`
+exec echo '"-----> Installing mdbtools 0.7"'
 
-# exec `build_dir=$1`
-# exec `status "Setting PATH"`
-# exec `mkdir -p $build_dir/.profile.d`
-# exec `echo "export PATH=\"\$HOME/vendor/mdbtools/src/util:\$PATH\"" > $build_dir/.profile.d/mdbtools.sh`
+exec 'cd $1'
+exec 'curl https://s3.amazonaws.com/db-stat/public/mdbtools-0.7.tar.gz -s -O'
+exec 'mkdir -p vendor'
+exec 'tar -C vendor -xvf mdbtools-0.7.tar.gz'
+
+exec 'build_dir=$1'
+exec 'status "Setting PATH"'
+exec 'mkdir -p $build_dir/.profile.d'
+exec 'echo "export PATH=\"\$HOME/vendor/mdbtools/src/util:\$PATH\"" > $build_dir/.profile.d/mdbtools.sh'
 
 
 LanguagePack::Instrument.trace 'compile', 'app.compile' do
