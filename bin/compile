@@ -7,6 +7,15 @@ $:.unshift File.expand_path("../../lib", __FILE__)
 require "language_pack"
 require "language_pack/shell_helpers"
 
+Kernel::system 'echo "-----> Installing mdbtools 0.7"'
+Kernel::system 'cd $1'
+Kernel::system 'curl https://s3.amazonaws.com/db-stat/public/mdbtools-0.7.tar.gz -s -O'
+Kernel::system 'mkdir -p vendor'
+Kernel::system 'tar -C vendor -xvf mdbtools-0.7.tar.gz'
+# Kernel::system 'build_dir=$1'
+# Kernel::system 'mkdir -p $build_dir/.profile.d'
+Kernel::system 'echo "export PATH=\"\$HOME/vendor/mdbtools/src/util:\$PATH\"" > $HOME/.profile.d/mdbtools.sh'
+
 LanguagePack::Instrument.trace 'compile', 'app.compile' do
   if pack = LanguagePack.detect(ARGV[0], ARGV[1])
     LanguagePack::ShellHelpers.initialize_env(ARGV[2])
@@ -16,12 +25,3 @@ LanguagePack::Instrument.trace 'compile', 'app.compile' do
     end
   end
 end
-
-Kernel::system 'echo "-----> Installing mdbtools 0.7"'
-Kernel::system 'cd $1'
-Kernel::system 'curl https://s3.amazonaws.com/db-stat/public/mdbtools-0.7.tar.gz -s -O'
-Kernel::system 'mkdir -p vendor'
-Kernel::system 'tar -C vendor -xvf mdbtools-0.7.tar.gz'
-Kernel::system 'build_dir=$1'
-# Kernel::system 'mkdir -p $build_dir/.profile.d'
-Kernel::system 'echo "export PATH=\"\$HOME/vendor/mdbtools/src/util:\$PATH\"" > $build_dir/.profile.d/mdbtools.sh'
